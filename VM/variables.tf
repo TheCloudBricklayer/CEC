@@ -1,0 +1,4 @@
+variable "Public_key" {
+  description = "Public key for the instance"
+  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3nu1MN8v45BR4+Uf8zZDE8KSsFWbey0D0VRH8ZVnAyGuqlRONjn5u44YzHfvDE2xlF8EiudyV3JW2V/dUx2aI7VlObGohSMluIDf2z/n98Jj4zohjy+g++fsjCK+2aKJGQUiHwO3CHqoj3oIstQW4Y3EsMGPsLd9sAYYJH3Am7a/3Jf7jKHGBP2me2b3W82GyWhar/5A09bbpeEJUZmnNUAw4EkSLRd32hH751rSEeUtDtQuN3VyofaCyzXQg5uiGC2EQxzmUfgpJkYLfDW4TWh49fVRYs7BsoZjrNhojtM7ecruflUm4e0jXtzIi7v3DjtOak7n0jbyfDB+d4s+FF/KApFZBPwtpUfJV9XzKZd+tY6hNYCFb9+gL6aiTn6+wWeOG70ddX6xTABSPmQ3v/P/w/80dVd42K0QNsh1CCSa2TYBIxqRmQJ6+fxTcfEZP1hiQQ7FZw/BRtqiDuVGic1YtMjtu7YELdzgXtAVoJ8oCAcueeav/PBWR6qOOjKc= eddy_@DESKTOP-JIS8HSK"
+}
