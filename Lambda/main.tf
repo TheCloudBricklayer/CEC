@@ -38,17 +38,30 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
   policy      = <<EOF
 {
  "Version": "2012-10-17",
- "Statement": [
-   {
-     "Action": [
-       "logs:CreateLogGroup",
-       "logs:CreateLogStream",
-       "logs:PutLogEvents"
-     ],
-     "Resource": "arn:aws:logs:*:*:*",
-     "Effect": "Allow"
-   }
- ]
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutMetricAlarm",
+                "cloudwatch:PutMetricData",
+                "cloudwatch:DescribeAlarmsForMetric",
+                "cloudwatch:DescribeAlarms",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:DeleteAlarms"
+
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:CreateLogGroup",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        }
+    ]
 }
 EOF
 }
@@ -68,7 +81,8 @@ resource "aws_lambda_function" "terraform_lambda_func" {
   filename      = "../code/lambda_function.zip"
   function_name = "Spacelift_Test_Lambda_Function"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "index.lambda_handler"
+  handler       = "cloudwatch_basics.usage_demo"
   runtime       = "python3.9"
+  timeout       = "60"
   depends_on    = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role]
 }
