@@ -79,10 +79,10 @@ data "archive_file" "zip_the_python_code" {
 
 resource "aws_lambda_function" "terraform_lambda_func" {
   filename      = "../code/lambda_function.zip"
-  function_name = "Spacelift_Test_Lambda_Function"
+  function_name = "cloud_engineer_challenge"
   role          = aws_iam_role.lambda_role.arn
   handler       = "cloudwatch_basics.usage_demo"
   runtime       = "python3.9"
-  timeout       = "60"
+  timeout       = "900"
   depends_on    = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role]
 }

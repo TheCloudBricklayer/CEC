@@ -278,13 +278,13 @@ def usage_demo(event, context):
                 'counts': [random.randint(1, offset + 1) for _ in range(10)]
             })
 
-    alarm_name = 'high_page_views'
+    alarm_name = 'CPU_Utilization'
     period = 60
     eval_periods = 3
     print(f"Creating alarm {alarm_name} for metric {metric_name}.")
     alarm = cw_wrapper.create_metric_alarm(
         metric_namespace, metric_name, alarm_name, 'Maximum', period, eval_periods,
-        100, 'GreaterThanThreshold')
+        90, 'GreaterThanThreshold')
     print(f"Alarm ARN is {alarm.alarm_arn}.")
     print(f"Current alarm state is: {alarm.state_value}.")
 
@@ -293,7 +293,7 @@ def usage_demo(event, context):
     while alarm.state_value == 'INSUFFICIENT_DATA':
         print("Sending data for the metric.")
         cw_wrapper.put_metric_data(
-            metric_namespace, metric_name, random.randint(100, 200), 'Count')
+            metric_namespace, metric_name, random.randint(60, 100), 'Count')
         alarm.load()
         print(f"Current alarm state is: {alarm.state_value}.")
         if alarm.state_value == 'INSUFFICIENT_DATA':
