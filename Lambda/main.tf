@@ -12,6 +12,16 @@ provider "aws" {
   region = "us-east-1"
 }
 
+resource "aws_sns_topic" "email_alert" {
+  name = "user-updates-topic"
+}
+
+resource "aws_sns_topic_subscription" "user_updates_sqs_target" {
+  topic_arn = aws_sns_topic.email_alert.arn
+  protocol  = "email"
+  endpoint  = "eduardo.amaroherrera@gmail.com"
+}
+
 resource "aws_iam_role" "lambda_role" {
   name               = "Spacelift_Test_Lambda_Function_Role"
   assume_role_policy = <<EOF
@@ -86,3 +96,5 @@ resource "aws_lambda_function" "terraform_lambda_func" {
   timeout       = "900"
   depends_on    = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role]
 }
+
+
